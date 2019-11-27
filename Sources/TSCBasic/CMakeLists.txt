@@ -50,6 +50,7 @@ add_library(TSCBasic
   Thread.swift
   Tuple.swift)
 target_link_libraries(TSCBasic PUBLIC
+  Foundation
   TSCLibc)
 # NOTE(compnerd) workaround for CMake not setting up include flags yet
 set_target_properties(TSCBasic PROPERTIES
