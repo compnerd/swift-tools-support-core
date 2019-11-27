@@ -19,11 +19,13 @@ target_link_libraries(TSCLibc PUBLIC
 set_target_properties(TSCLibc PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
 
-set_property(GLOBAL APPEND PROPERTY TSC_EXPORTS TSCLibc)
-
-if(CMAKE_SYSTEM_NAME STREQUAL Windows)
+get_swift_host_arch(swift_arch)
 install(TARGETS TSCLibc
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)
-endif()
+install(FILES
+  ${CMAKE_Swift_MODULE_DIRECTORY}/TSCLibc.swiftdoc
+  ${CMAKE_Swift_MODULE_DIRECTORY}/TSCLibc.swiftmodule
+  DESTINATION lib/swift$<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:_static>/$<LOWER_CASE:${CMAKE_SYSTEM_NAME}>/${swift_arch})
+set_property(GLOBAL APPEND PROPERTY TSC_EXPORTS TSCLibc)

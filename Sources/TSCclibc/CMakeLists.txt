@@ -11,9 +11,6 @@ add_library(TSCclibc STATIC
 target_include_directories(TSCclibc PUBLIC
   include)
 
-if(NOT BUILD_SHARED_LIBS)
-  install(TARGETS TSCclibc
-    ARCHIVE DESTINATION lib)
-endif()
-
+install(TARGETS TSCclibc
+  DESTINATION lib)
 set_property(GLOBAL APPEND PROPERTY TSC_EXPORTS TSCclibc)
